@@ -1,0 +1,26 @@
+# Environment
+.env
+
+# Composer
+/vendor
+
+# Node
+/node_modules
+
+# IDEs
+.vscode
+.idea
+
+# Logs and caches
+*.log
+logs/
+writable/cache/
+writable/logs/
+writable/session/
+
+# PHPUnit
+.phpunit.result.cache
+
+# System files
+.DS_Store
+Thumbs.db
