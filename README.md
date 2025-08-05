@@ -1,60 +1,64 @@
-# CodeIgniter 4 Framework
+# 🎢 RideControl
 
-## What is CodeIgniter?
+RideControl is a backend system built with CodeIgniter 4 for managing amusement park rides. It provides API endpoints to monitor the number of available personnel and clients, validate operational status, and manage wagons per ride.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## ⚙️ Technologies Used
+- CodeIgniter 4 (PHP framework)
+- RESTful API design
+- Composer for dependency management
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## 🚀 Features
+- Add/update/delete coaster rides and wagons
+- Verify if a ride has enough personnel and clients to operate
+- JSON-based API structure
+- Environment configuration using `.env` file
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## 📡 API Reference
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+### ▶ Create Coaster
+`POST /api/coasters`  
+Creates a new coaster with data:
+```json
+{
+  "liczba_personelu": 4,
+  "liczba_klientow": 20,
+  "dl_trasy": 250,
+  "godziny_od": "10:00",
+  "godziny_do": "18:00"
+}
+```
 
-## Important Change with index.php
+### ▶ Update Coaster
+`PUT /api/coasters/{id}`  
+Updates an existing coaster.
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+### ▶ Add Wagons to Coaster
+`POST /api/coasters/{coaster_id}/wagons`  
+Adds wagons to the specified coaster.
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+### ▶ Delete Wagon from Coaster
+`DELETE /api/coasters/{coaster_id}/wagons/{wagon_id}`  
+Removes a specific wagon from the coaster.
 
-**Please** read the user guide for a better explanation of how CI4 works!
+### ▶ Check if Enough Personnel
+`GET /api/coasters/{coaster_id}/check-personel`  
+Returns whether there is enough staff assigned to the coaster.
 
-## Repository Management
+### ▶ Check if Enough Clients
+`GET /api/coasters/{coaster_id}/check-clients`  
+Returns whether there are enough clients for the ride to start.
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+## 📁 Project Structure
+- `app/Controllers/` – Contains Coaster and Wagon controllers.
+- `app/Models/` – Business logic and data layer.
+- `app/Config/Routes.php` – Route definitions.
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+## 🧪 Development Setup
+```bash
+composer install
+php spark serve
+```
 
-## Contributing
+---
 
-We welcome contributions from the community.
-
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
-
-## Server Requirements
-
-PHP version 8.1 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+Project developed by [DNJessica](https://github.com/DNJessica)
